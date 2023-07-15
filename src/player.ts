@@ -3,6 +3,7 @@ import { Socket } from "socket.io";
 export class Player {
   name: string;
   socket: Socket;
+  isHost: boolean = false;
 
   constructor(name: string, socket: Socket) {
     this.name = name;
@@ -15,5 +16,13 @@ export class Player {
 
   getSocket() {
     return this.socket;
+  }
+
+  getIsHost() {
+    return this.isHost;
+  }
+
+  setIsHost(isHost: boolean) {
+    this.isHost = isHost;
   }
 }

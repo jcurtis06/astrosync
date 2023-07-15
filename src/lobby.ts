@@ -18,8 +18,20 @@ export class Lobby {
     console.log("adding player " + player.name + " to lobby " + this.id);
 
     player.socket.join(this.id);
-    player.socket.emit("joinedGame", this.id, player.name);
     this.players.push(player);
+
+    player.socket.emit(
+      "joinedGame",
+      this.id,
+      player.name,
+      this.players.map((p) => p.name),
+      player.isHost
+    );
+
+    player.socket.to(this.id).emit(
+      "playerJoined",
+      this.players.map((p) => p.name)
+    );
   }
 
   removePlayer(player: Player) {

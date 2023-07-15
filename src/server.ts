@@ -13,6 +13,7 @@ app.use(
   "/socket.io",
   express.static(path.join(__dirname, "node_modules/socket.io/client-dist/"))
 );
+app.use(express.static(path.join(__dirname, "../client/")));
 app.set("port", process.env.PORT || 3000);
 
 let http = require("http").Server(app);
@@ -46,6 +47,7 @@ io.on("connection", function (socket: Socket) {
       const lobby = new Lobby(code);
 
       lobbies.set(code, lobby);
+      player.setIsHost(true);
       lobby.addPlayer(player);
 
       console.log("created game with code " + code);

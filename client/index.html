@@ -18,43 +18,18 @@
       <button onClick="createGame()">Create/Join Game</button>
     </div>
 
-    <!-- Game -->
+    <!-- Lobby -->
     <div id="game" style="display: none">
       <p id="lobbyCode">Lobby code:</p>
       <p id="username">Username:</p>
-    </div>
+      <p id="playerList">Player List</p>
 
-    <div>
-      <h1>Welcome to Astrosync!</h1>
-      <p>
-        This isn't just any old asteroids clone.<br />
-        This game will test your ability to communicate with your teammates.<br />
-        You will control a spaceship with your team to destroy asteroids.<br />
-        You will control the ship's thrusters, and your teammates will control
-        the ship's rotation and firing.<br />
-        Share the code above with your teammates to get started!
-      </p>
+      <button id="startGame" style="display: none" onclick="startGame()">
+        Start Game
+      </button>
     </div>
 
     <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-    <script>
-      const socket = io("http://localhost:3000");
-
-      // Game Setup
-      function createGame() {
-        const playerName = document.getElementById("playerName").value;
-        const gameName = document.getElementById("gameName").value;
-        socket.emit("createGame", playerName, gameName);
-      }
-
-      socket.on("joinedGame", (code, username) => {
-        document.getElementById("gameSetup").style.display = "none";
-
-        document.getElementById("lobbyCode").innerHTML += " " + code;
-        document.getElementById("username").innerHTML += " " + username;
-
-        document.getElementById("game").style.display = "block";
-      });
-    </script>
+    <script src="index.js"></script>
   </body>
 </html>
